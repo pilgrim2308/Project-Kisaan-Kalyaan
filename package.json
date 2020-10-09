@@ -1,0 +1,20 @@
+{
+  "name": "Project-Kisaan-Kalyaan",
+  "version": "1.0.0",
+  "description": "An idea to bring the farmers of our country on a platform which provides them with real-time prices of their produce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pilgrim2308/Project-Kisaan-Kalyaan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pilgrim2308/Project-Kisaan-Kalyaan/issues"
+  },
+  "homepage": "https://github.com/pilgrim2308/Project-Kisaan-Kalyaan#readme"
+}
