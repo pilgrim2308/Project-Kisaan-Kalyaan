@@ -44,6 +44,24 @@ const UserSchema = new Schema ({
             trim: true,
             required: true,
         },
+        address : {
+            house: {
+                type: String,
+                required: true
+            }
+            district: {
+                type: String,
+                required: true,
+            }
+            state: {
+                type: String,
+                required: true,
+            }
+            pincode: {
+                type: String,
+                required: true,
+            }
+        },
         isAdmin: {
             type: Boolean,
             default: false,
