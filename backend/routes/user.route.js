@@ -26,10 +26,16 @@ router.post('/', async(req,res) => {
             email: req.body.email,
             dob: Date.parse(req.body.dob),
             mobile: req.body.mobile,
+            address: {
+                house: req.body.house,
+                district: req.body.district,
+                state: req.body.state,
+                pincode: req.body.pincode,
+            }
         },
     });
 
-    user.password = await bcrypt.hash(user.password,10);
+    user.personal.password = await bcrypt.hash(user.personal.password,10);
     await user.save();
 
     const token = user.generateAuthToken();
