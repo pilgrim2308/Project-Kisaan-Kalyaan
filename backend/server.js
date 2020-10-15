@@ -1,11 +1,9 @@
 var express                 = require("express"),
     mongoose                = require("mongoose"),
     passport                = require("passport"),
-    { Users }               = require("./models/user.model"),
     User                    = require("./models/user.model"),
     LocalStrategy           = require("passport-local"),
-    passportLocalMongoose   = require("passport-local-mongoose"),
-    config = require('config');
+    passportLocalMongoose   = require("passport-local-mongoose");
     
 require('dotenv').config();
 
