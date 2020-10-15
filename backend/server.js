@@ -32,29 +32,35 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// LANDING PAGE
 app.get('/', (req,res) => {
     res.send('homepage');
 })
+
+// CURRENT LIST OF ALL
 app.get('/current', isLoggedIn, async (req,res) => {
     const user = await User.find({}, (err, user) => {
         if(err){
-            res.send('dikkt');
+            res.send('Dikkat hai!');
         } else {
             res.send(user);
         }
     });
 });
 
+// LOGIN PAGE
 app.get("/login", function(req, res){
     res.send("login page");
 });
 
+// LOGIN ROUTE
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/current",
     failureRedirect: "/login"
 }), function(req, res){    
 });
 
+// SIGNUP ROUTE
 app.post('/register', async(req,res) => {
     User.register(
         new User({ 
@@ -76,11 +82,13 @@ app.post('/register', async(req,res) => {
     });
 });
 
+// LOGOUT ROUTE
 app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");
 });
 
+// MIDDLEWARE
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated())
         return next();
