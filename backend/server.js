@@ -36,14 +36,8 @@ app.get('/', (req,res) => {
 })
 
 // CURRENT LIST OF ALL
-app.get('/current', isLoggedIn, async (req,res) => {
-    const user = await User.find({}, (err, user) => {
-        if(err){
-            res.send('Dikkat hai!');
-        } else {
-            res.send(user);
-        }
-    });
+app.get('/current', isLoggedIn, async (req, res) => {
+    res.send(req.user);
 });
 
 // LOGIN PAGE
