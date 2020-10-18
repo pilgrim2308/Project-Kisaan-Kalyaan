@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
-    cropid: {
-        type: String,
-        required: true,
-        trim: true,
-    },
     crop: {
         type: String,
         required: true,
@@ -34,13 +29,12 @@ const listingSchema = new Schema({
     },
     buyerid: {
         type: String,
-        required: true,
         default: null,
     },
     payment: {
         mode: {
         type: String,
-        required: true,
+        default: "Cash On Delivery",
         },
         ispaid: {
             type: Boolean,
@@ -49,7 +43,7 @@ const listingSchema = new Schema({
     },
     status: {
         type: String,
-        required: true,
+        default: "Available",
     }
 });
 
