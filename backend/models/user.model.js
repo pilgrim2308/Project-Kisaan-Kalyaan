@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const Joi = require('joi');
+const   mongoose                = require('mongoose');
+        passportLocalMongoose   = require("passport-local-mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -22,22 +20,8 @@ const UserSchema = new Schema ({
             maxlength: 50,
         },
         dob: {
-            type: Date,
-            required: true,
-        },
-        email: {
-            type: String,
-            trim: true,
-            unique: true,
-            required: true,
-            minlength: 5,
-            maxlength: 255,
-        },
-        password: {
-            type: String,
-            required: true,
-            minlength: 3,
-            maxlength: 255
+            type: Date
+            // required: true,
         },
         mobile: {
             type: String,
@@ -46,20 +30,20 @@ const UserSchema = new Schema ({
         },
         address : {
             house: {
-                type: String,
-                required: true
+                type: String
+                // required: true
             },
             district: {
-                type: String,
-                required: true,
+                type: String
+                // required: true,
             },
             state: {
-                type: String,
-                required: true,
+                type: String
+                // required: true,
             },
             pincode: {
-                type: String,
-                required: true,
+                type: String
+                // required: true,
             }
         },
         isAdmin: {
@@ -67,6 +51,8 @@ const UserSchema = new Schema ({
             default: false,
         }
     },
+    username: String,
+    password: String,
     cart: [{
         cropid: {
             type: String,
@@ -190,22 +176,7 @@ const UserSchema = new Schema ({
     }],
 });
 
-UserSchema.methods.generateAuthToken = function() {
-    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('myprivatekey'));
-    return token;
-}
+UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', UserSchema);
-
-function validateUser(user) {
-    const schema = {
-        name: Joi.string().min(3).max(50).required(),
-        email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(3).max(255).required(),
-    };
-
-    return Joi.validate(user, schema);
-}
-
-exports.User = User;
-exports.validate = validateUser;
+module.exports = User;
