@@ -51,10 +51,16 @@ const UserSchema = new Schema ({
             default: false,
         }
     },
-    username: String,
-    password: String,
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     cart: [{
-        cropid: {
+        _id: {
             type: String,
             required: true,
             trim: true,
@@ -85,7 +91,7 @@ const UserSchema = new Schema ({
         },
     }],
     orders: [{
-        cropid: {
+        _id: {
             type: String,
             required: true,
             trim: true,
@@ -130,7 +136,7 @@ const UserSchema = new Schema ({
         }
     }],
     listings: [{
-        cropid: {
+        _id: {
             type: String,
             required: true,
             trim: true,
@@ -157,12 +163,12 @@ const UserSchema = new Schema ({
         },
         buyerid: {
             type: String,
-            required: true,
+            default: null,
         },
         payment: {
             mode: {
             type: String,
-            required: true,
+            default: "Cash On Delivery",
             },
             ispaid: {
                 type: Boolean,
@@ -171,7 +177,7 @@ const UserSchema = new Schema ({
         },
         status: {
             type: String,
-            required: true,
+            default: "Available",
         }
     }],
 });

@@ -8,6 +8,7 @@ var express                 = require("express"),
 require('dotenv').config();
 
 const app = express();
+const listingRouter = require('./routes/listing.route');
 
 //connect to mongodb 
 const uri = process.env.ATLAS_URI;
@@ -31,9 +32,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // LANDING PAGE
-app.get('/', (req,res) => {
-    res.send('homepage');
-})
+// app.get('/', (req,res) => {
+//     res.send('homepage');
+// })
 
 // CURRENT LIST OF ALL
 app.get('/current', isLoggedIn, async (req, res) => {
@@ -80,6 +81,21 @@ app.get("/logout", function(req, res){
     res.redirect("/");
 });
 
+//listing route
+//works only when user is logged in
+const Listing = require('./models/listing.model');
+// app.get("/:id", function(req, res){
+//     // res.send(req.params.id);
+//     Listing.find({"_id": req.params.id}, function(err, listing){
+//         if(err) console.log(err);
+//         //else res.send(listing);
+        
+//         console.log(listing[0].sellerid);
+//         const userListings = User.findById(listing[0].sellerid);
+//         res.send(userListings.username); 
+//     })
+// });
+
 // MIDDLEWARE
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated())
@@ -87,5 +103,18 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login");
 }
 
+//listing route
+//works only when user is logged in
+app.use('/',isLoggedIn, listingRouter);
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+// {
+// 	"crop": "rice",
+// 	"variety": "basmati",
+// 	"harvestdate": "11-03-2020",
+// 	"quantity": 60,
+// 	"price": 12,
+// 	"sellerid": "5f87e3dbcb90fc4010e35844"
+// }
